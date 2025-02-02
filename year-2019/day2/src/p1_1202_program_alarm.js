@@ -1,3 +1,5 @@
+import { add, multiply } from "./tool.js";
+
 const getParameters = (code, pointer) => {
   const operand1 = code[code[pointer + 1]];
   const operand2 = code[code[pointer + 2]];
@@ -5,18 +7,17 @@ const getParameters = (code, pointer) => {
   return [operand1, operand2, address];
 };
 
-const add = (a, b) => a + b;
-const multiply = (a, b) => a * b;
-
 const performOperation = (code, pointer, operation) => {
   const [operand1, operand2, address] = getParameters(code, pointer);
   code[address] = operation(operand1, operand2);
   return pointer + 4;
 };
 
-const computer = (intCode) => {
+const computer = ([...intCode], firstElement, secondElement) => {
   let pointer = 0;
   const code = intCode;
+  code[1] = firstElement;
+  code[2] = secondElement;
   let opcode = code[pointer];
   while (opcode !== 99) {
     if (opcode === 1) {
@@ -27,7 +28,7 @@ const computer = (intCode) => {
     }
     opcode = code[pointer];
   }
-  return code;
+  return code[0];
 };
 
 export { computer };

@@ -1,9 +1,10 @@
 import { computer } from "./src/p1_1202_program_alarm.js";
-import { input } from "./data/input.js";
+import { extendedComputer } from "./src/p2_1202_program_alarm.js";
+import { intCode } from "./src/tool.js";
 
-const intCode = () => input.split(",").map(Number);
 const main = () => {
-  console.log(computer(intCode()));
+  console.log("part 1:", computer(intCode(), 12, 2));
+  console.log("part 2:", extendedComputer(intCode()));
 };
 
 main();
